@@ -13,6 +13,11 @@ diff ./timetable.json ../data/timetable.json
 # If new one is different or the old one does not exist, commit new one to GitHub
 if [ $? -ne 0 ]; then
     echo New update found at `date` >> $HOME/updatelog.txt
+    mv -f ./timetable.json ../data/
+    python3 ./update_date.py
+    git commit -m "Updated on `date`"
+    git add *
+    git push
     exit 0
 else 
     echo No changes on `date` >> ./updatelog.txt
